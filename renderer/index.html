@@ -6,32 +6,31 @@
 <title>Goldogram Miner</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: #080808; color: #fff; font-family: 'SF Mono', monospace; height: 100vh; overflow: hidden; user-select: none; -webkit-app-region: no-drag; }
-.titlebar { height: 38px; -webkit-app-region: drag; display: flex; align-items: center; justify-content: center; background: #080808; border-bottom: 1px solid #111; }
-.titlebar span { font-size: 12px; color: #444; letter-spacing: 0.15em; }
-.container { padding: 20px; height: calc(100vh - 38px); display: flex; flex-direction: column; gap: 16px; }
-.stats-row { display: flex; gap: 12px; }
-.stat-card { flex: 1; background: #111; border: 1px solid #1a1a1a; border-radius: 12px; padding: 14px; text-align: center; }
-.stat-label { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: #444; margin-bottom: 6px; }
-.stat-value { font-size: 20px; font-weight: 600; color: #D4AF37; line-height: 1; }
-.stat-value.cyan { color: #60c8dc; }
+body { background: #000; color: #fff; font-family: 'SF Mono', monospace; height: 100vh; overflow: hidden; user-select: none; -webkit-app-region: no-drag; }
+.titlebar { height: 38px; -webkit-app-region: drag; display: flex; align-items: center; justify-content: center; background: #000; border-bottom: 1px solid #111; }
+.titlebar span { font-size: 12px; color: #333; letter-spacing: 0.15em; }
+.container { padding: 16px; height: calc(100vh - 38px); display: flex; flex-direction: column; gap: 12px; }
+.stats-row { display: flex; gap: 10px; }
+.stat-card { flex: 1; background: #0a0a0a; border: 1px solid #1a1a1a; border-radius: 10px; padding: 12px; text-align: center; }
+.stat-label { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: #333; margin-bottom: 5px; }
+.stat-value { font-size: 18px; font-weight: 600; color: #D4AF37; line-height: 1; }
+.stat-value.cyan { color: #60d2e6; }
 .stat-value.green { color: #4ade80; }
-.canvas-wrap { background: #0d0d0d; border: 1px solid #1a1a1a; border-radius: 12px; overflow: hidden; position: relative; flex: 1; }
+.canvas-wrap { background: #000; border: 1px solid #111; border-radius: 10px; overflow: hidden; flex: 1; position: relative; }
 canvas { display: block; width: 100%; height: 100%; }
-.canvas-status { position: absolute; bottom: 10px; left: 0; right: 0; text-align: center; font-size: 9px; letter-spacing: 0.1em; color: #333; }
-.settings { background: #111; border: 1px solid #1a1a1a; border-radius: 12px; padding: 16px; display: flex; gap: 12px; align-items: flex-end; }
-.field { display: flex; flex-direction: column; gap: 6px; flex: 1; }
-.field label { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: #444; }
-.field input, .field select { background: #080808; border: 1px solid #222; border-radius: 8px; color: #fff; font-family: 'SF Mono', monospace; font-size: 12px; padding: 8px 10px; outline: none; width: 100%; }
+.settings { background: #0a0a0a; border: 1px solid #1a1a1a; border-radius: 10px; padding: 14px; display: flex; gap: 10px; align-items: flex-end; }
+.field { display: flex; flex-direction: column; gap: 5px; flex: 1; }
+.field label { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: #333; }
+.field input, .field select { background: #000; border: 1px solid #1e1e1e; border-radius: 7px; color: #fff; font-family: 'SF Mono', monospace; font-size: 12px; padding: 7px 9px; outline: none; width: 100%; }
 .field input:focus, .field select:focus { border-color: #D4AF37; }
-.btn-start { background: linear-gradient(135deg, #D4AF37, #A67C00); color: #000; border: none; border-radius: 10px; padding: 10px 24px; font-family: 'SF Mono', monospace; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; }
-.btn-stop { background: #1a1a1a; color: #ff4444; border: 1px solid #ff4444; border-radius: 10px; padding: 10px 24px; font-family: 'SF Mono', monospace; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; }
-.log { background: #0a0a0a; border: 1px solid #1a1a1a; border-radius: 8px; padding: 10px; height: 140px; overflow-y: auto; font-size: 10px; color: #333; }
+.btn-start { background: linear-gradient(135deg, #D4AF37, #A67C00); color: #000; border: none; border-radius: 9px; padding: 9px 22px; font-family: 'SF Mono', monospace; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+.btn-stop { background: #0a0a0a; color: #ff4444; border: 1px solid #ff4444; border-radius: 9px; padding: 9px 22px; font-family: 'SF Mono', monospace; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+.log { background: #000; border: 1px solid #1a1a1a; border-radius: 7px; padding: 8px 10px; height: 140px; overflow-y: auto; font-size: 10px; color: #333; }
 .log .accepted { color: #4ade80; }
 .log .rejected { color: #ff4444; }
-.log .info { color: #444; }
+.log .info { color: #333; }
 .log .synced { color: #D4AF37; }
-.log .new_block { color: #60c8dc; }
+.log .new_block { color: #60d2e6; }
 </style>
 </head>
 <body>
@@ -45,7 +44,6 @@ canvas { display: block; width: 100%; height: 100%; }
   </div>
   <div class="canvas-wrap">
     <canvas id="qc"></canvas>
-    <div class="canvas-status" id="canvas-status">QUANTUM FIELD IDLE</div>
   </div>
   <div class="settings">
     <div class="field" style="flex:2">
@@ -65,235 +63,330 @@ canvas { display: block; width: 100%; height: 100%; }
   </div>
   <div class="log" id="log"></div>
 </div>
-
 <script>
 const canvas = document.getElementById('qc');
 const ctx = canvas.getContext('2d');
-let isMining = false;
-let animId;
-let t = 0;
-let blocksFound = 0;
-let foundFlash = 0;
+let W, H, cx, cy;
 
 function resize() {
-  canvas.width = canvas.offsetWidth * devicePixelRatio;
-  canvas.height = canvas.offsetHeight * devicePixelRatio;
+  W = canvas.offsetWidth; H = canvas.offsetHeight;
+  canvas.width = W * devicePixelRatio; canvas.height = H * devicePixelRatio;
   ctx.scale(devicePixelRatio, devicePixelRatio);
+  cx = W/2; cy = H/2;
 }
 resize();
 window.addEventListener('resize', resize);
 
-const CORES = 12;
-const rings = Array.from({length: 4}, (_, i) => ({
-  radius: 30 + i * 22, angle: Math.random() * Math.PI * 2,
-  speed: (i % 2 === 0 ? 1 : -1) * (0.006 + i * 0.003),
-  nodes: 3 + i, phase: Math.random() * Math.PI * 2,
+const gold = (a=1) => `rgba(212,175,55,${a})`;
+const cyan = (a=1) => `rgba(96,210,230,${a})`;
+const purple = (a=1) => `rgba(180,120,255,${a})`;
+const deepgold = (a=1) => `rgba(255,210,60,${a})`;
+const white = (a=1) => `rgba(255,255,255,${a})`;
+
+const stars = Array.from({length:180}, () => ({
+  x: Math.random()*1400-350, y: Math.random()*400,
+  r: 0.3+Math.random()*1.2, phase: Math.random()*Math.PI*2,
+  speed: 0.01+Math.random()*0.02,
+  col: Math.random()<0.15?'cyan':Math.random()<0.1?'purple':'white',
+  flash: 0,
 }));
 
-const CHARS = '01Ψ∇⊗⟨⟩ℏΩ∑Φ√±∞';
-let columns = [];
-function initCols(w) {
-  columns = [];
-  for (let i = 0; i < Math.floor(w / 14); i++) {
-    columns.push({ x: i * 14 + 7, y: Math.random() * 200, speed: 0.3 + Math.random() * 0.6,
-      char: CHARS[Math.floor(Math.random() * CHARS.length)], alpha: 0.03 + Math.random() * 0.05, timer: Math.random() * 30 });
+let nebulae = [];
+function initNebulae() {
+  nebulae = [
+    {x:W*0.15,y:H*0.3, rx:160,ry:80, col:'gold',  a:0.04,phase:0,  speed:0.003},
+    {x:W*0.82,y:H*0.65,rx:140,ry:70, col:'cyan',  a:0.03,phase:1.5,speed:0.004},
+    {x:W*0.5, y:H*0.15,rx:200,ry:60, col:'purple',a:0.025,phase:3.1,speed:0.002},
+    {x:W*0.3, y:H*0.8, rx:120,ry:50, col:'gold',  a:0.03,phase:2.2,speed:0.003},
+    {x:W*0.75,y:H*0.2, rx:100,ry:55, col:'cyan',  a:0.025,phase:0.8,speed:0.005},
+  ];
+}
+initNebulae();
+window.addEventListener('resize', initNebulae);
+
+let shockwaves = [];
+
+const PHI = (1+Math.sqrt(5))/2;
+const baseNodes3D = [
+  [0,1,PHI],[0,-1,PHI],[0,1,-PHI],[0,-1,-PHI],
+  [1,PHI,0],[-1,PHI,0],[1,-PHI,0],[-1,-PHI,0],
+  [PHI,0,1],[PHI,0,-1],[-PHI,0,1],[-PHI,0,-1],[0,0,0],
+];
+for(let i=0;i<8;i++){
+  const a=i/8*Math.PI*2;
+  baseNodes3D.push([Math.cos(a)*1.8,Math.sin(a)*1.8,0]);
+  baseNodes3D.push([Math.cos(a)*1.4,0,Math.sin(a)*1.4]);
+}
+function getEdges(n){const e=[];for(let i=0;i<n.length;i++)for(let j=i+1;j<n.length;j++){const d=Math.hypot(n[i][0]-n[j][0],n[i][1]-n[j][1],n[i][2]-n[j][2]);if(d<2.2&&d>0.1)e.push([i,j]);}return e;}
+const edges = getEdges(baseNodes3D);
+let rotX=0,rotY=0,rotZ=0,t=0;
+let phase='mining',phaseT=0,particles=[],blocksFound=0,isMining=false;
+
+function project(x,y,z){
+  let x1=x*Math.cos(rotY)-z*Math.sin(rotY),z1=x*Math.sin(rotY)+z*Math.cos(rotY),y1=y;
+  let y2=y1*Math.cos(rotX)-z1*Math.sin(rotX),z2=y1*Math.sin(rotX)+z1*Math.cos(rotX),x2=x1;
+  let x3=x2*Math.cos(rotZ)-y2*Math.sin(rotZ),y3=x2*Math.sin(rotZ)+y2*Math.cos(rotZ);
+  const sc=(5/(5+z2))*Math.min(W,H)*0.27;
+  return[cx+x3*sc,cy+y3*sc,z2,sc];
+}
+
+function triggerCollapse(){
+  if(phase!=='mining')return;
+  phase='collapse';phaseT=0;blocksFound++;
+  stars.forEach(s=>s.flash=1);
+  shockwaves.push({r:0,maxR:Math.max(W,H)*0.9,alpha:0.6,col:'cyan'});
+  shockwaves.push({r:0,maxR:Math.max(W,H)*0.6,alpha:0.4,col:'gold'});
+  particles=[];
+  for(let i=0;i<100;i++){
+    const a=Math.random()*Math.PI*2,b=Math.random()*Math.PI*2,r=0.3+Math.random()*2.2;
+    particles.push({x:Math.cos(a)*Math.cos(b)*r,y:Math.sin(b)*r,z:Math.sin(a)*Math.cos(b)*r,
+      vx:(Math.random()-0.5)*0.1,vy:(Math.random()-0.5)*0.1,vz:(Math.random()-0.5)*0.1,
+      life:1,col:Math.random()<0.5?'gold':'cyan',size:1+Math.random()*3});
   }
 }
-initCols(canvas.offsetWidth);
 
-const streams = Array.from({length: CORES}, (_, i) => ({
-  phase: (i / CORES) * Math.PI * 2, speed: 0.025 + Math.random() * 0.02,
-  hz: 0, amp: 6 + Math.random() * 5, color: i % 3 === 0 ? 'cyan' : 'gold',
-}));
-
-function gold(a) { return `rgba(212,175,55,${a})`; }
-function cyan(a) { return `rgba(96,200,220,${a})`; }
-function purple(a) { return `rgba(160,100,255,${a})`; }
-
-function draw() {
-  t++;
-  const w = canvas.offsetWidth, h = canvas.offsetHeight;
-  const cx = w / 2, cy = h / 2;
-  ctx.clearRect(0, 0, w, h);
-
-  const active = isMining;
-
-  // Hash rain
-  columns.forEach(col => {
-    col.y += active ? col.speed : col.speed * 0.1;
-    col.timer--;
-    if (col.timer <= 0) { col.char = CHARS[Math.floor(Math.random() * CHARS.length)]; col.timer = 15 + Math.random() * 30; }
-    if (col.y > h) col.y = -10;
-    ctx.fillStyle = foundFlash > 0 ? cyan(col.alpha * 2) : gold(col.alpha * (active ? 1 : 0.3));
-    ctx.font = '9px monospace';
-    ctx.textAlign = 'center';
-    ctx.fillText(col.char, col.x, col.y);
+function drawNebulae(){
+  nebulae.forEach(n=>{
+    n.phase+=n.speed;
+    const pulse=0.6+0.4*Math.sin(n.phase);
+    const fb=phase==='explode'||phase==='collapse'?3:1;
+    ctx.save();
+    ctx.translate(n.x+Math.sin(n.phase*0.3)*20,n.y+Math.cos(n.phase*0.2)*12);
+    ctx.scale(1+Math.sin(n.phase)*0.08,1+Math.cos(n.phase)*0.06);
+    const gr=ctx.createRadialGradient(0,0,0,0,0,n.rx);
+    const c=n.col==='gold'?'rgba(212,175,55,':n.col==='cyan'?'rgba(96,210,230,':'rgba(180,120,255,';
+    gr.addColorStop(0,c+(n.a*pulse*fb*2)+')');
+    gr.addColorStop(0.5,c+(n.a*pulse*fb)+')');
+    gr.addColorStop(1,c+'0)');
+    ctx.fillStyle=gr;
+    ctx.beginPath();ctx.ellipse(0,0,n.rx,n.ry,Math.sin(n.phase*0.1)*0.3,0,Math.PI*2);ctx.fill();
+    ctx.restore();
   });
+}
 
-  // Streams
-  streams.forEach((s, i) => {
-    s.phase += active ? s.speed : s.speed * 0.05;
-    const side = i < CORES / 2 ? 0 : 1;
-    const li = side === 0 ? i : i - Math.floor(CORES / 2);
-    const tot = Math.ceil(CORES / 2);
-    const yPos = 20 + (li / (tot - 1 || 1)) * (h - 40);
-    const xS = side === 0 ? 0 : cx + 50, xE = side === 0 ? cx - 50 : w;
-    const intensity = active ? 0.6 + Math.sin(s.phase) * 0.3 : 0.1;
-    ctx.beginPath();
-    for (let k = 0; k <= 30; k++) {
-      const x = xS + (xE - xS) * (k / 30);
-      const y = yPos + Math.sin(s.phase + k * 0.4) * s.amp * intensity;
-      k === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+function drawStars(){
+  stars.forEach(s=>{
+    s.phase+=s.speed; s.flash=Math.max(0,s.flash-0.025);
+    const pulse=0.4+0.6*Math.abs(Math.sin(s.phase));
+    const r=s.r*(1+s.flash*2);
+    ctx.beginPath();ctx.arc(s.x,s.y,r*(0.8+pulse*0.4),0,Math.PI*2);
+    const a=(0.3+pulse*0.5+s.flash)*(phase==='explode'||phase==='collapse'?1.5:1);
+    ctx.fillStyle=s.col==='cyan'?cyan(a):s.col==='purple'?purple(a):white(a*0.7);
+    ctx.fill();
+    if(s.r>0.9||s.flash>0.3){
+      const gl=s.r*0.5+s.flash*8;
+      ctx.strokeStyle=s.col==='cyan'?cyan(0.4+s.flash*0.5):white(0.25+s.flash*0.4);
+      ctx.lineWidth=0.5;
+      ctx.beginPath();ctx.moveTo(s.x-gl,s.y);ctx.lineTo(s.x+gl,s.y);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(s.x,s.y-gl);ctx.lineTo(s.x,s.y+gl);ctx.stroke();
     }
-    ctx.strokeStyle = (s.color === 'cyan' ? cyan : gold)(0.2 + intensity * 0.15);
-    ctx.lineWidth = 1;
-    ctx.stroke();
-    const dotX = side === 0 ? 5 : w - 5;
-    const dp = 0.5 + 0.5 * Math.sin(s.phase * 2);
-    ctx.beginPath();
-    ctx.arc(dotX, yPos, 2.5 * dp, 0, Math.PI * 2);
-    ctx.fillStyle = s.color === 'cyan' ? cyan(0.7) : gold(0.7);
+  });
+}
+
+function drawShockwaves(){
+  shockwaves=shockwaves.filter(sw=>sw.r<sw.maxR);
+  shockwaves.forEach(sw=>{
+    sw.r+=8+sw.r*0.04; sw.alpha*=0.93;
+    ctx.beginPath();ctx.arc(cx,cy,sw.r,0,Math.PI*2);
+    ctx.strokeStyle=sw.col==='cyan'?cyan(sw.alpha):gold(sw.alpha);
+    ctx.lineWidth=1.5;ctx.stroke();
+    if(sw.r>20){
+      ctx.beginPath();ctx.arc(cx,cy,sw.r*0.75,0,Math.PI*2);
+      ctx.strokeStyle=sw.col==='cyan'?cyan(sw.alpha*0.4):gold(sw.alpha*0.4);
+      ctx.lineWidth=0.5;ctx.stroke();
+    }
+  });
+}
+
+function drawHashRain(){
+  if(!isMining)return;
+  const chars='01ΨΩ∇⊗ℏ∑√±∞⟨⟩Φ';
+  const count=Math.floor(W/20);
+  for(let i=0;i<count;i++){
+    const x=i*(W/count)+(W/count/2);
+    const y=((t*0.25+i*41)%(H+16))-8;
+    const a=0.025+Math.sin(t*0.015+i)*0.015;
+    ctx.fillStyle=phase==='collapse'||phase==='explode'?cyan(a*2.5):gold(a);
+    ctx.font='8px monospace';ctx.textAlign='center';
+    ctx.fillText(chars[Math.floor((t*0.7+i*11)%chars.length)],x,y);
+  }
+}
+
+function drawLattice(){
+  if(!isMining&&phase==='mining')return;
+  const nodes2D=baseNodes3D.map(([x,y,z])=>project(x,y,z));
+  const collapse=phase==='collapse'?Math.min(phaseT/30,1):0;
+  const explode=phase==='explode'?Math.min(phaseT/20,1):0;
+  const reform=phase==='reform'?Math.min(phaseT/40,1):0;
+  const sf=phase==='collapse'?1-collapse*0.85:phase==='explode'?0.15+explode*0.85:phase==='reform'?0.15+reform*0.85:1;
+  edges.forEach(([i,j])=>{
+    const[x1,y1,z1]=nodes2D[i],[x2,y2,z2]=nodes2D[j];
+    const px1=cx+(x1-cx)*sf,py1=cy+(y1-cy)*sf,px2=cx+(x2-cx)*sf,py2=cy+(y2-cy)*sf;
+    const pulse=0.7+0.3*Math.sin(t*0.05+i*0.3);
+    const a=(0.12+((z1+z2)/2+3)/6*0.2)*sf;
+    ctx.beginPath();ctx.moveTo(px1,py1);ctx.lineTo(px2,py2);
+    ctx.strokeStyle=phase==='collapse'||phase==='explode'?cyan(a*2*pulse):(i>=13||j>=13)?cyan(a*0.7*pulse):gold(a*pulse);
+    ctx.lineWidth=0.7;ctx.stroke();
+  });
+  nodes2D.forEach(([x,y,z,s],i)=>{
+    if(i===12)return;
+    const px=cx+(x-cx)*sf,py=cy+(y-cy)*sf;
+    const pulse=0.5+0.5*Math.sin(t*0.08+i*0.4);
+    const r=(1.5+pulse*1.5)*sf;
+    ctx.beginPath();ctx.arc(px,py,r,0,Math.PI*2);
+    ctx.fillStyle=phase==='collapse'?cyan(0.7+pulse*0.3):phase==='explode'?deepgold(0.8+pulse*0.2):i>=13?cyan(0.4+(z+3)/6*0.5):gold(0.4+(z+3)/6*0.5);
+    ctx.fill();
+    if(i%3===0&&sf>0.3){
+      const ea=t*0.04*(i%2===0?1:-1)+i*1.2,er=(7+i%4*2)*sf;
+      ctx.beginPath();ctx.arc(px+Math.cos(ea)*er,py+Math.sin(ea)*er,1.2*sf,0,Math.PI*2);
+      ctx.fillStyle=phase==='collapse'||phase==='explode'?white(0.9):purple(0.8);ctx.fill();
+    }
+  });
+}
+
+function drawParticles(){
+  particles.forEach(p=>{
+    if(phase==='collapse'){p.x+=(0-p.x)*0.12;p.y+=(0-p.y)*0.12;p.z+=(0-p.z)*0.12;}
+    else if(phase==='explode'){p.x+=p.vx*3;p.y+=p.vy*3;p.z+=p.vz*3;p.life-=0.022;}
+    if(p.life<=0)return;
+    const[px,py]=project(p.x,p.y,p.z);
+    ctx.beginPath();ctx.arc(px,py,p.size*(phase==='explode'?p.life:1),0,Math.PI*2);
+    ctx.fillStyle=p.col==='gold'?deepgold(phase==='explode'?p.life:0.8):cyan(phase==='explode'?p.life:0.8);
     ctx.fill();
   });
+  particles=particles.filter(p=>p.life>0);
+}
 
-  // Rings
-  rings.forEach((ring, ri) => {
-    ring.angle += active ? ring.speed : ring.speed * 0.05;
-    ring.phase += 0.015;
-    const pulse = 0.6 + 0.4 * Math.sin(ring.phase);
-    const alpha = (foundFlash > 0 ? 0.4 : (0.1 + ri * 0.03) * pulse) * (active ? 1 : 0.3);
-    ctx.beginPath();
-    ctx.arc(cx, cy, ring.radius, 0, Math.PI * 2);
-    ctx.strokeStyle = foundFlash > 0 ? cyan(alpha) : gold(alpha);
-    ctx.lineWidth = active ? 1 : 0.5;
-    ctx.setLineDash([4, 6]);
-    ctx.stroke();
-    ctx.setLineDash([]);
-    for (let n = 0; n < ring.nodes; n++) {
-      const a = ring.angle + (n / ring.nodes) * Math.PI * 2;
-      ctx.beginPath();
-      ctx.arc(cx + ring.radius * Math.cos(a), cy + ring.radius * Math.sin(a), 2.5, 0, Math.PI * 2);
-      ctx.fillStyle = foundFlash > 0 ? cyan(0.9) : (ri % 2 === 0 ? gold(0.8) : purple(0.7));
-      ctx.fill();
-    }
-  });
-
-  // Core
-  const cp = 0.5 + 0.5 * Math.sin(t * (active ? 0.05 : 0.01));
-  const cr = 18 + cp * 3;
-  ctx.beginPath();
-  ctx.arc(cx, cy, cr + 12, 0, Math.PI * 2);
-  ctx.strokeStyle = foundFlash > 0 ? cyan(0.1) : gold(0.06 * (active ? 1 : 0.3));
-  ctx.lineWidth = 8;
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.arc(cx, cy, cr, 0, Math.PI * 2);
-  ctx.fillStyle = foundFlash > 0 ? 'rgba(96,200,220,0.15)' : 'rgba(212,175,55,0.08)';
+function drawCenter(){
+  const collapse=phase==='collapse'?Math.min(phaseT/30,1):0;
+  const explode=phase==='explode'?Math.min(phaseT/20,1):0;
+  const reform=phase==='reform'?Math.min(phaseT/40,1):0;
+  const pulse=0.5+0.5*Math.sin(t*0.07);
+  let cr=phase==='collapse'?18*(1-collapse*0.8):phase==='explode'?4+explode*24:phase==='reform'?4+reform*18:18+pulse*4;
+  for(let i=3;i>=1;i--){
+    ctx.beginPath();ctx.arc(cx,cy,cr+i*16,0,Math.PI*2);
+    const a=(0.035-i*0.008)*(phase==='explode'?3:1)*(phase==='collapse'?2:1);
+    ctx.strokeStyle=phase==='collapse'||phase==='explode'?cyan(a):gold(a*(isMining?1:0.3));
+    ctx.lineWidth=10;ctx.stroke();
+  }
+  ctx.beginPath();ctx.arc(cx,cy,cr,0,Math.PI*2);
+  ctx.fillStyle=phase==='collapse'?'rgba(0,210,230,0.18)':phase==='explode'?'rgba(255,210,50,0.25)':'rgba(212,175,55,0.1)';
   ctx.fill();
-  ctx.strokeStyle = foundFlash > 0 ? cyan(0.9) : gold(active ? 0.8 : 0.3);
-  ctx.lineWidth = 1.5;
-  ctx.stroke();
-  ctx.fillStyle = foundFlash > 0 ? cyan(1) : gold(active ? 0.9 : 0.3);
-  ctx.font = 'bold 9px monospace';
-  ctx.textAlign = 'center';
-  ctx.fillText(foundFlash > 0 ? 'FOUND' : 'GoGX', cx, cy - 2);
-  ctx.font = '7px monospace';
-  ctx.fillStyle = foundFlash > 0 ? cyan(0.7) : gold(active ? 0.5 : 0.2);
-  ctx.fillText('PoW', cx, cy + 8);
-
-  if (foundFlash > 0) foundFlash--;
-  animId = requestAnimationFrame(draw);
-}
-draw();
-
-function fmtHashrate(hr) {
-  if (hr >= 1e6) return (hr / 1e6).toFixed(2) + ' MH/s';
-  if (hr >= 1e3) return (hr / 1e3).toFixed(1) + ' KH/s';
-  return hr.toFixed(0) + ' H/s';
+  ctx.strokeStyle=phase==='collapse'||phase==='explode'?cyan(0.9):gold(isMining?0.8:0.25);
+  ctx.lineWidth=1.5;ctx.stroke();
+  if(phase==='explode'||phase==='reform'){
+    const a=phase==='explode'?Math.min(phaseT/15,1):1;
+    ctx.fillStyle=deepgold(a);ctx.font=`bold ${14+explode*5}px monospace`;ctx.textAlign='center';
+    ctx.fillText('G',cx,cy+5);
+    ctx.font='8px monospace';ctx.fillStyle=cyan(a*0.8);ctx.fillText('GoGX',cx,cy+18);
+  } else {
+    ctx.fillStyle=gold(isMining?0.75:0.2);ctx.font='bold 8px monospace';ctx.textAlign='center';
+    ctx.fillText(isMining?'PoW':'GoGX',cx,cy-2);
+    ctx.font='7px monospace';ctx.fillStyle=gold(isMining?0.4:0.15);
+    ctx.fillText(isMining?'MINING':'IDLE',cx,cy+8);
+  }
 }
 
-function log(msg, cls) {
-  const el = document.getElementById('log');
-  const line = document.createElement('div');
-  line.className = cls || 'info';
-  line.textContent = msg;
-  el.appendChild(line);
-  el.scrollTop = el.scrollHeight;
-  if (el.children.length > 100) el.removeChild(el.firstChild);
+function animate(){
+  t++;
+  ctx.clearRect(0,0,W,H);
+  const rs=phase==='collapse'?0.045:phase==='explode'?0.002:isMining?0.007:0.002;
+  rotY+=rs;rotX+=rs*0.38;rotZ+=rs*0.13;
+  phaseT++;
+  if(phase==='collapse'&&phaseT>36){phase='explode';phaseT=0;}
+  if(phase==='explode'&&phaseT>52){phase='reform';phaseT=0;}
+  if(phase==='reform'&&phaseT>46){phase='mining';phaseT=0;particles=[];}
+  drawNebulae();
+  drawStars();
+  drawHashRain();
+  drawShockwaves();
+  if(isMining||phase!=='mining')drawLattice();
+  drawParticles();
+  drawCenter();
+  requestAnimationFrame(animate);
+}
+animate();
+
+function fmtHashrate(hr){
+  if(hr>=1e6)return(hr/1e6).toFixed(2)+' MH/s';
+  if(hr>=1e3)return(hr/1e3).toFixed(1)+' KH/s';
+  return hr.toFixed(0)+' H/s';
 }
 
-async function startMining() {
-  const address = document.getElementById('address').value.trim();
-  if (!address.startsWith('Go')) { log('⚠ Invalid wallet address — must start with Go', 'rejected'); return; }
-  const cores = parseInt(document.getElementById('cores').value) || 4;
-  const mode = document.getElementById('mode').value;
-  const result = await window.miner.start({ address, cores, mode });
-  if (result.error) { log('Error: ' + result.error, 'rejected'); return; }
-  isMining = true;
-  document.getElementById('btn-start').style.display = 'none';
-  document.getElementById('btn-stop').style.display = '';
-  document.getElementById('status-text').textContent = 'MINING';
-  document.getElementById('status-text').style.color = '#4ade80';
-  document.getElementById('canvas-status').textContent = 'MINING ACTIVE — QUANTUM FIELD SYNCHRONIZED';
-  log('▶ Mining started — ' + cores + ' cores — ' + mode + ' mode', 'synced');
+function log(msg,cls){
+  const el=document.getElementById('log');
+  const line=document.createElement('div');
+  line.className=cls||'info';line.textContent=msg;
+  el.appendChild(line);el.scrollTop=el.scrollHeight;
+  if(el.children.length>100)el.removeChild(el.firstChild);
 }
 
-async function stopMining() {
+async function startMining(){
+  const address=document.getElementById('address').value.trim();
+  if(!address.startsWith('Go')){log('Invalid wallet address','rejected');return;}
+  const cores=parseInt(document.getElementById('cores').value)||4;
+  const mode=document.getElementById('mode').value;
+  const result=await window.miner.start({address,cores,mode});
+  if(result.error){log('Error: '+result.error,'rejected');return;}
+  isMining=true;
+  document.getElementById('btn-start').style.display='none';
+  document.getElementById('btn-stop').style.display='';
+  document.getElementById('status-text').textContent='MINING';
+  document.getElementById('status-text').style.color='#4ade80';
+  log('Mining started — '+cores+' cores — '+mode+' mode','synced');
+}
+
+async function stopMining(){
   await window.miner.stop();
-  isMining = false;
-  document.getElementById('btn-start').style.display = '';
-  document.getElementById('btn-stop').style.display = 'none';
-  document.getElementById('status-text').textContent = 'IDLE';
-  document.getElementById('status-text').style.color = '#4ade80';
-  document.getElementById('canvas-status').textContent = 'QUANTUM FIELD IDLE';
-  document.getElementById('hashrate').textContent = '0 H/s';
-  log('■ Mining stopped', 'info');
+  isMining=false;
+  document.getElementById('btn-start').style.display='';
+  document.getElementById('btn-stop').style.display='none';
+  document.getElementById('status-text').textContent='IDLE';
+  document.getElementById('status-text').style.color='#4ade80';
+  document.getElementById('hashrate').textContent='0 H/s';
+  log('Mining stopped','info');
 }
 
-window.miner.onMessage((msg) => {
-  switch (msg.type) {
+window.miner.onMessage((msg)=>{
+  switch(msg.type){
     case 'hashrate':
-      document.getElementById('hashrate').textContent = fmtHashrate(msg.hashrate);
-      document.getElementById('blocks').textContent = msg.blocks_found;
-      blocksFound = msg.blocks_found;
+      document.getElementById('hashrate').textContent=fmtHashrate(msg.hashrate);
+      document.getElementById('blocks').textContent=msg.blocks_found;
       break;
     case 'synced':
-      document.getElementById('height').textContent = msg.height.toLocaleString();
-      log('✓ Synced — height ' + msg.height + ' — difficulty ' + msg.difficulty, 'synced');
+      document.getElementById('height').textContent=msg.height.toLocaleString();
+      log('Synced — height '+msg.height+' — difficulty '+msg.difficulty,'synced');
       break;
     case 'new_block':
-      document.getElementById('height').textContent = msg.height.toLocaleString();
+      document.getElementById('height').textContent=msg.height.toLocaleString();
       break;
     case 'block_accepted':
-      foundFlash = 120;
-      log('⚡ Block accepted! Height ' + msg.height + ' — Reward: ' + msg.reward.toFixed(3) + ' GoGX', 'accepted');
+      triggerCollapse();
+      log('Block accepted! Height '+msg.height+' — Reward: '+msg.reward.toFixed(3)+' GoGX','accepted');
       break;
     case 'block_rejected':
-      log('✗ ' + msg.message, 'rejected');
+      log(msg.message,'rejected');
       break;
     case 'stopped':
-      isMining = false;
-      document.getElementById('btn-start').style.display = '';
-      document.getElementById('btn-stop').style.display = 'none';
-      document.getElementById('status-text').textContent = 'IDLE';
-      document.getElementById('canvas-status').textContent = 'QUANTUM FIELD IDLE';
+      isMining=false;
+      document.getElementById('btn-start').style.display='';
+      document.getElementById('btn-stop').style.display='none';
+      document.getElementById('status-text').textContent='IDLE';
       break;
     case 'info':
-      log(msg.message, 'info');
+      log(msg.message,'info');
       break;
   }
 });
 
-// Load saved address
-window.addEventListener('DOMContentLoaded', async () => {
-  const saved = localStorage.getItem('gm_address');
-  if (saved) document.getElementById('address').value = saved;
-  const cores = await window.miner.getCores();
-  const coresInput = document.getElementById('cores');
-  coresInput.max = cores;
-  coresInput.value = Math.max(1, cores - 2);
-  document.getElementById('address').addEventListener('change', (e) => {
-    localStorage.setItem('gm_address', e.target.value);
+window.addEventListener('DOMContentLoaded',async()=>{
+  const saved=localStorage.getItem('gm_address');
+  if(saved)document.getElementById('address').value=saved;
+  const cores=await window.miner.getCores();
+  const ci=document.getElementById('cores');
+  ci.max=cores; ci.value=Math.max(1,cores-2);
+  document.getElementById('address').addEventListener('change',(e)=>{
+    localStorage.setItem('gm_address',e.target.value);
   });
 });
 </script>
