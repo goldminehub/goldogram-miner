@@ -1,0 +1,31 @@
+{
+  "name": "goldogram-miner",
+  "version": "1.0.0",
+  "description": "Goldogram Desktop Miner",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --mac --arm64",
+    "dist": "electron-builder --mac --arm64"
+  },
+  "build": {
+    "appId": "org.goldminequant.miner",
+    "productName": "Goldogram Miner",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": [{"target": "dmg", "arch": ["arm64"]}],
+      "icon": "assets/icon.icns"
+    },
+    "extraResources": [
+      {
+        "from": "goldogram-miner-core/target/release/goldogram-miner-core",
+        "to": "goldogram-miner-core"
+      }
+    ],
+    "files": ["src/**/*", "renderer/**/*", "assets/**/*"]
+  },
+  "devDependencies": {
+    "electron": "^35.0.0",
+    "electron-builder": "^26.0.0"
+  }
+}
